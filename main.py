@@ -1,12 +1,11 @@
 # import modules
 import pygame,sys
-import os
 import pygame.freetype
 import time
 
 pygame.init()
 
-# Varibles
+# Variables
 Map2 = '''333333333B
 WWWWWWWWWB
 WWWWWWWWWB
