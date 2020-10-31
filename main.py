@@ -1,5 +1,6 @@
 # import modules
-import pygame,sys
+import pygame
+import sys
 import pygame.freetype
 import time
 
@@ -49,7 +50,7 @@ Font2 = pygame.freetype.Font("Fonts/Bad Signal.otf", 40)
 pressed = pygame.key.get_pressed()
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
-Scene = "Story"
+# Scene = "Story"
 playerX = 236
 playerY = 186
 x = 600
@@ -72,8 +73,8 @@ pygame. display. set_icon(icon)
 pygame.mixer.music.load('Music/Story OST 1.wav')
 pygame.mixer.music.play(-1)
 screen.blit(pygame.transform.scale(SlideOne, (412, 296)), (94, 50))
-text1, rect = Font1.render('People get lost in this game,', (255, 255, 255))
-text2, rect = Font1.render('       and never leave.', (255, 255, 255))
+text1, _ = Font1.render('People get lost in this game,', (255, 255, 255))
+text2, _ = Font1.render('       and never leave.', (255, 255, 255))
 screen.blit(text1, (100, 380))
 screen.blit(text2, (100, 430))
 pygame.display.update()
@@ -81,15 +82,15 @@ SlideOneAudio.play()
 time.sleep(5)
 screen.fill([0, 0, 0])
 screen.blit(pygame.transform.scale(SlideTwo, (412, 296)), (94, 50))
-text1, rect = Font1.render('They never find a way out.', (255, 255, 255))
-screen.blit(text1, (120,380))
+text1, _ = Font1.render('They never find a way out.', (255, 255, 255))
+screen.blit(text1, (120, 380))
 pygame.display.update()
 SlideTwoAudio.play()
 time.sleep(5)
 screen.fill([0, 0, 0])
 screen.blit(pygame.transform.scale(SlideThree, (412, 296)), (94, 50))
-text1, rect = Font1.render('At some point they die, as early', (255, 255, 255))
-text2, rect = Font1.render('          as a day or two.', (255, 255, 255))
+text1, _ = Font1.render('At some point they die, as early', (255, 255, 255))
+text2, _ = Font1.render('          as a day or two.', (255, 255, 255))
 screen.blit(text1, (90, 380))
 screen.blit(text2, (90, 430))
 pygame.display.update()
@@ -97,16 +98,16 @@ SlideThreeAudio.play()
 time.sleep(5)
 screen.fill([0, 0, 0])
 screen.blit(pygame.transform.scale(SlideFour, (412, 296)), (94, 50))
-text1, rect = Font1.render('the reason why is unknown.', (255, 255, 255))
-screen.blit(text1, (120,380))
+text1, _ = Font1.render('the reason why is unknown.', (255, 255, 255))
+screen.blit(text1, (120, 380))
 pygame.display.update()
 SlideFourAudio.play()
 time.sleep(5)
 screen.fill([0, 0, 0])
 screen.blit(pygame.transform.scale(SlideFive, (412, 296)), (94, 50))
-text1, rect = Font1.render('But i think we are close to', (255, 255, 255))
-text2, rect = Font1.render('           finding out.', (255, 255, 255))
-screen.blit(text1, (100,380))
+text1, _ = Font1.render('But i think we are close to', (255, 255, 255))
+text2, _ = Font1.render('           finding out.', (255, 255, 255))
+screen.blit(text1, (100, 380))
 screen.blit(text2, (100, 430))
 pygame.display.update()
 SlideFiveAudio.play()
@@ -116,6 +117,7 @@ pygame.mixer.music.load('Music/Menu OST 2.wav')
 pygame.mixer.music.play(-1)
 Scene = "Menu"
 Menu.play()
+
 
 def tiles(Map1):
     global Wall
@@ -148,6 +150,7 @@ def tiles(Map1):
             if character == 'S':
                 screen.blit(pygame.transform.scale(Sign, (64, 64)), (x * 64, y * 64))
 
+
 def init_display():
     global screen, Wall
     global screen, Water
@@ -167,7 +170,8 @@ def init_display():
     Three = pygame.image.load('Sprites/Tiles/Tile3.png')
     Blank = pygame.image.load('Sprites/Tiles/Tile4.png')
     Sign = pygame.image.load('Sprites/Tiles/Sign.png')
-   
+
+
 # loop
 while True:
     pressed = pygame.key.get_pressed()
