@@ -1,20 +1,10 @@
 # import modules
 import pygame
-import sys
 import pygame.freetype
-import time
 
 pygame.init()
 
 # Variables
-Map2 = '''333333333B
-WWWWWWWWWB
-WWWWWWWWWB
-CCCCCCCCCB
-CCCCCCCCCB
-CCCCCCCCCB 
-FFFFFFFFFB
-BBBBBBBBBB'''
 
 Map1 = '''231CCC2331
 WWWCCCWWWW
@@ -24,6 +14,17 @@ CCCCCCCCCC
 CCCCCCCCCCC
 FFFFFFFFFFF
 BBBBBBBBBB'''
+
+
+Map2 = '''333333333B
+WWWWWWWWWB
+WWWWWWWWWB
+CCCCCCCCCB
+CCCCCCCCCB
+CCCCCCCCCB 
+FFFFFFFFFB
+BBBBBBBBBB'''
+
 
 # W = wall F = floor
 WINDOW_WIDTH = 600
@@ -45,16 +46,6 @@ SlideFour = pygame.image.load('Sprites/Story/Slide4.png')
 SlideFive = pygame.image.load('Sprites/Story/Slide5.png')
 Slay1 = pygame.mixer.Sound('SFX/Enemy slay.wav')
 Walk1 = pygame.mixer.Sound('SFX/Walk.wav')
-Font1 = pygame.freetype.Font("Fonts/Font1.ttf", 40)
-Font2 = pygame.freetype.Font("Fonts/Bad Signal.otf", 40)
-pressed = pygame.key.get_pressed()
-BLACK = (0, 0, 0)
-WHITE = (255, 255, 255)
-# Scene = "Story"
-playerX = 236
-playerY = 186
-x = 600
-y = 500
 SlideOneAudio = pygame.mixer.Sound('SFX/STORY1.wav')
 SlideTwoAudio = pygame.mixer.Sound('SFX/STORY2.wav')
 SlideThreeAudio = pygame.mixer.Sound('SFX/STORY3.wav')
@@ -62,64 +53,77 @@ SlideFourAudio = pygame.mixer.Sound('SFX/STORY4.wav')
 SlideFiveAudio = pygame.mixer.Sound('SFX/STORY5.wav')
 Welcome = pygame.mixer.Sound('SFX/Welcome to my game.wav')
 Menu = pygame.mixer.Sound('SFX/Deadly Decison.wav')
+Font1 = pygame.freetype.Font("Fonts/Font1.ttf", 40)
+Font2 = pygame.freetype.Font("Fonts/Bad Signal.otf", 40)
+clock = pygame.time.Clock()
+pressed = pygame.key.get_pressed()
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+# Scene = "Story"
+playerX = 236
+playerY = 186
+x = WINDOW_WIDTH
+y = WINDOW_HEIGHT
 
 # Title, Icon and Display
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 # The first one is X the second is Y
 pygame.display.set_caption('Deadly decision')
 icon = pygame.image.load('Sprites/Tiles/Brick.png')
-pygame. display. set_icon(icon)
-
-pygame.mixer.music.load('Music/Story OST 1.wav')
-pygame.mixer.music.play(-1)
-screen.blit(pygame.transform.scale(SlideOne, (412, 296)), (94, 50))
-text1, _ = Font1.render('People get lost in this game,', (255, 255, 255))
-text2, _ = Font1.render('       and never leave.', (255, 255, 255))
-screen.blit(text1, (100, 380))
-screen.blit(text2, (100, 430))
-pygame.display.update()
-SlideOneAudio.play()
-time.sleep(5)
-screen.fill([0, 0, 0])
-screen.blit(pygame.transform.scale(SlideTwo, (412, 296)), (94, 50))
-text1, _ = Font1.render('They never find a way out.', (255, 255, 255))
-screen.blit(text1, (120, 380))
-pygame.display.update()
-SlideTwoAudio.play()
-time.sleep(5)
-screen.fill([0, 0, 0])
-screen.blit(pygame.transform.scale(SlideThree, (412, 296)), (94, 50))
-text1, _ = Font1.render('At some point they die, as early', (255, 255, 255))
-text2, _ = Font1.render('          as a day or two.', (255, 255, 255))
-screen.blit(text1, (90, 380))
-screen.blit(text2, (90, 430))
-pygame.display.update()
-SlideThreeAudio.play()
-time.sleep(5)
-screen.fill([0, 0, 0])
-screen.blit(pygame.transform.scale(SlideFour, (412, 296)), (94, 50))
-text1, _ = Font1.render('the reason why is unknown.', (255, 255, 255))
-screen.blit(text1, (120, 380))
-pygame.display.update()
-SlideFourAudio.play()
-time.sleep(5)
-screen.fill([0, 0, 0])
-screen.blit(pygame.transform.scale(SlideFive, (412, 296)), (94, 50))
-text1, _ = Font1.render('But i think we are close to', (255, 255, 255))
-text2, _ = Font1.render('           finding out.', (255, 255, 255))
-screen.blit(text1, (100, 380))
-screen.blit(text2, (100, 430))
-pygame.display.update()
-SlideFiveAudio.play()
-time.sleep(5)
-pygame.mixer.music.stop()
-pygame.mixer.music.load('Music/Menu OST 2.wav')
-pygame.mixer.music.play(-1)
+pygame.display.set_icon(icon)
 Scene = "Menu"
-Menu.play()
 
 
-def tiles(Map1):
+def intro():
+    pygame.mixer.music.load('Music/Story OST 1.wav')
+    pygame.mixer.music.play(-1)
+    screen.blit(pygame.transform.scale(SlideOne, (412, 296)), (94, 50))
+    text1, _ = Font1.render('People get lost in this game,', (255, 255, 255))
+    text2, _ = Font1.render('       and never leave.', (255, 255, 255))
+    screen.blit(text1, (100, 380))
+    screen.blit(text2, (100, 430))
+    pygame.display.update()
+    SlideOneAudio.play()
+    pygame.time.delay(5 * 1000)  # Time in milliseconds
+    screen.fill([0, 0, 0])
+    screen.blit(pygame.transform.scale(SlideTwo, (412, 296)), (94, 50))
+    text1, _ = Font1.render('They never find a way out.', (255, 255, 255))
+    screen.blit(text1, (120, 380))
+    pygame.display.update()
+    SlideTwoAudio.play()
+    pygame.time.delay(5 * 1000)
+    screen.fill([0, 0, 0])
+    screen.blit(pygame.transform.scale(SlideThree, (412, 296)), (94, 50))
+    text1, _ = Font1.render('At some point they die, as early', (255, 255, 255))
+    text2, _ = Font1.render('          as a day or two.', (255, 255, 255))
+    screen.blit(text1, (90, 380))
+    screen.blit(text2, (90, 430))
+    pygame.display.update()
+    SlideThreeAudio.play()
+    pygame.time.delay(5 * 1000)
+    screen.fill([0, 0, 0])
+    screen.blit(pygame.transform.scale(SlideFour, (412, 296)), (94, 50))
+    text1, _ = Font1.render('the reason why is unknown.', (255, 255, 255))
+    screen.blit(text1, (120, 380))
+    pygame.display.update()
+    SlideFourAudio.play()
+    pygame.time.delay(5 * 1000)
+    screen.fill([0, 0, 0])
+    screen.blit(pygame.transform.scale(SlideFive, (412, 296)), (94, 50))
+    text1, _ = Font1.render('But i think we are close to', (255, 255, 255))
+    text2, _ = Font1.render('           finding out.', (255, 255, 255))
+    screen.blit(text1, (100, 380))
+    screen.blit(text2, (100, 430))
+    pygame.display.update()
+    SlideFiveAudio.play()
+    pygame.time.delay(5 * 1000)
+    pygame.mixer.music.stop()
+    pygame.mixer.music.load('Music/Menu OST 2.wav')
+    pygame.mixer.music.play(-1)
+    Menu.play()
+
+
+def tiles(input_map):
     global Wall
     global Water
     global Floor
@@ -129,7 +133,7 @@ def tiles(Map1):
     global Three
     global Blank
     global Sign
-    for y, line in enumerate(Map1):
+    for y, line in enumerate(input_map):
         for x, character in enumerate(line):
             if character == 'W':
                 screen.blit(pygame.transform.scale(Wall, (64, 64)), (x * 64, y * 64))
@@ -173,30 +177,39 @@ def init_display():
 
 
 # loop
-while True:
+running = True
+while running:
+    clock.tick(60)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
     pressed = pygame.key.get_pressed()
     if Scene == "Menu":
-       screen.fill([0, 0, 0])
-       screen.blit(pygame.transform.scale(GameTitle, (590, 30)), (5, 15))
-       screen.blit(pygame.transform.scale(Z, (262, 20)), (169, 430))
-       pygame.display.update()
-       if pressed[pygame.K_z]:
-          Welcome.play()
-          time.sleep(1.5)
-          screen.fill([0, 0, 0])
-          pygame.display.update()
-          pygame.mixer.music.stop()
-          time.sleep(2.7)
-          Scene = "Game"
-          init_display()
-          Slay1.play()
-          pygame.mixer.music.stop()
-          pygame.mixer.music.load('Music/HallowHalls OST 3.wav')
-          pygame.mixer.music.play(-1)
-          screen.fill([0, 0, 0])
-          tiles(Map1)
-          screen.blit(pygame.transform.scale(PlayerFront, (64, 64)), (playerX, playerY))
-          pygame.display.update()
+        intro()
+        screen.fill([0, 0, 0])
+        screen.blit(pygame.transform.scale(GameTitle, (590, 30)), (5, 15))
+        screen.blit(pygame.transform.scale(Z, (262, 20)), (169, 430))
+        pygame.display.update()
+
+        if pressed[pygame.K_z]:
+            Welcome.play()
+            pygame.time.delay(2 * 1000)
+            screen.fill([0, 0, 0])
+            pygame.display.update()
+            pygame.mixer.music.stop()
+            pygame.time.delay(3 * 1000)
+            Scene = "Game"
+            init_display()
+            Slay1.play()
+            pygame.mixer.music.stop()
+            pygame.mixer.music.load('Music/HallowHalls OST 3.wav')
+            pygame.mixer.music.play(-1)
+            screen.fill([0, 0, 0])
+            tiles(Map1)
+            screen.blit(pygame.transform.scale(PlayerFront, (64, 64)), (playerX, playerY))
+            pygame.display.update()
+
     if Scene == "Game":
         if pressed[pygame.K_w]:
             if Map == Map2 and playerY <= 145:
@@ -237,10 +250,10 @@ while True:
         if pressed[pygame.K_a]:
             if Map == Map2:
                 if playerX <= 0:
-                  Map = Map1
-                  tiles(Map)
-                  playerX = 595
-                  pygame.display.update()
+                    Map = Map1
+                    tiles(Map)
+                    playerX = 595
+                    pygame.display.update()
             if Map == Map1:
                 if playerX <= 180 and playerY <= 145:
                     playerX += 4
@@ -249,7 +262,3 @@ while True:
             tiles(Map)
             screen.blit(pygame.transform.scale(PlayerLeft, (64, 64)), (playerX, playerY))
             pygame.display.update()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-           pygame.quit()
-           sys.exit()
