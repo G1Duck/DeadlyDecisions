@@ -72,6 +72,19 @@ pygame.display.set_caption('Deadly decision')
 icon = pygame.image.load('Sprites/Tiles/Brick.png')
 pygame.display.set_icon(icon)
 Scene = "Menu"
+running = True
+
+
+# delay pauses the game without halting all execution/event handling
+def delay(duration):
+    exit_after = pygame.time.get_ticks() + duration
+    while pygame.time.get_ticks() < exit_after:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = false
+                pygame.quit()
+
+        clock.tick(5)
 
 
 def intro():
@@ -84,14 +97,14 @@ def intro():
     screen.blit(text2, (100, 430))
     pygame.display.update()
     SlideOneAudio.play()
-    pygame.time.delay(5 * 1000)  # Time in milliseconds
+    delay(5 * 1000)  # Time in milliseconds
     screen.fill([0, 0, 0])
     screen.blit(pygame.transform.scale(SlideTwo, (412, 296)), (94, 50))
     text1, _ = Font1.render('They never find a way out.', (255, 255, 255))
     screen.blit(text1, (120, 380))
     pygame.display.update()
     SlideTwoAudio.play()
-    pygame.time.delay(5 * 1000)
+    delay(5 * 1000)
     screen.fill([0, 0, 0])
     screen.blit(pygame.transform.scale(SlideThree, (412, 296)), (94, 50))
     text1, _ = Font1.render('At some point they die, as early', (255, 255, 255))
@@ -100,14 +113,14 @@ def intro():
     screen.blit(text2, (90, 430))
     pygame.display.update()
     SlideThreeAudio.play()
-    pygame.time.delay(5 * 1000)
+    delay(5 * 1000)
     screen.fill([0, 0, 0])
     screen.blit(pygame.transform.scale(SlideFour, (412, 296)), (94, 50))
     text1, _ = Font1.render('the reason why is unknown.', (255, 255, 255))
     screen.blit(text1, (120, 380))
     pygame.display.update()
     SlideFourAudio.play()
-    pygame.time.delay(5 * 1000)
+    delay(5 * 1000)
     screen.fill([0, 0, 0])
     screen.blit(pygame.transform.scale(SlideFive, (412, 296)), (94, 50))
     text1, _ = Font1.render('But i think we are close to', (255, 255, 255))
@@ -116,7 +129,7 @@ def intro():
     screen.blit(text2, (100, 430))
     pygame.display.update()
     SlideFiveAudio.play()
-    pygame.time.delay(5 * 1000)
+    delay(5 * 1000)
     pygame.mixer.music.stop()
     pygame.mixer.music.load('Music/Menu OST 2.wav')
     pygame.mixer.music.play(-1)
@@ -176,8 +189,8 @@ def init_display():
     Sign = pygame.image.load('Sprites/Tiles/Sign.png')
 
 
+intro()
 # loop
-running = True
 while running:
     clock.tick(60)
     for event in pygame.event.get():
@@ -186,7 +199,6 @@ while running:
 
     pressed = pygame.key.get_pressed()
     if Scene == "Menu":
-        intro()
         screen.fill([0, 0, 0])
         screen.blit(pygame.transform.scale(GameTitle, (590, 30)), (5, 15))
         screen.blit(pygame.transform.scale(Z, (262, 20)), (169, 430))
@@ -194,11 +206,11 @@ while running:
 
         if pressed[pygame.K_z]:
             Welcome.play()
-            pygame.time.delay(2 * 1000)
+            delay(2 * 1000)
             screen.fill([0, 0, 0])
             pygame.display.update()
             pygame.mixer.music.stop()
-            pygame.time.delay(3 * 1000)
+            delay(3 * 1000)
             Scene = "Game"
             init_display()
             Slay1.play()
