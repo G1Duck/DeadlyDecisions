@@ -81,7 +81,7 @@ def delay(duration):
     while pygame.time.get_ticks() < exit_after:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = false
+                running = False
                 pygame.quit()
 
         clock.tick(5)
